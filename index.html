@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Dissolve GeoJSON</title>
+	</head>
+	<script>
+		async function sendData() {
+			let dissolved = await fetch('/dissolve', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: document.querySelector('#geojson-area').value,
+			}).then(res => res.text());
+
+			document.querySelector('#geojson-area').value = dissolved;
+		}
+	</script>
+	<body>
+		<h3>Dissolve your GeoJSON</h3>
+		<p>Enter your GeoJSON into this textbox and hit the "Dissolve" button</p>
+		<textarea id="geojson-area" rows="6" cols="60"></textarea>
+		<button onclick="sendData()">Dissolve</button>
+	</body>
+</html>
